@@ -6,30 +6,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ProsesActivity">
-
     <ImageView
-            android:layout_width="403dp"
-            android:layout_height="407dp" app:srcCompat="@drawable/background"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" app:srcCompat="@drawable/error"
             android:id="@+id/imgCapture"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout" app:layout_constraintTop_toTopOf="parent"
-    />
-    <LinearLayout
-            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <ScrollView
             android:layout_width="0dp"
-            android:layout_height="323dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" android:background="@color/colorLinierLayout"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/imgCapture" app:layout_constraintVertical_bias="1.0"
-            android:id="@+id/linearLayout">
+            android:layout_height="250dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/imgCapture" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/scrollView2" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.555">
         <TextView
-                android:layout_margin="5dp"
-                android:justificationMode="inter_word"
-                android:text="TextView"
-                android:textColor="#fff"
+                android:id="@+id/txtResult"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txtHasil" android:layout_weight="1"/>
+                android:layout_height="wrap_content"/>
+    </ScrollView>
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="0dp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:orientation="horizontal"
+                  android:gravity="right"
+                  android:padding="2dp"
+                  app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+                  app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_copy"
+                android:id="@+id/btnCopy"/>
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_save"
+                android:id="@+id/btnSave"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

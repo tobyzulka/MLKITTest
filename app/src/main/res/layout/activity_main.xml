@@ -11,12 +11,14 @@
             android:layout_height="75dp" app:srcCompat="@drawable/icon_camera"
             android:id="@+id/ibtn_camera"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/ibtn_image" android:layout_marginTop="152dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@+id/ibtn_image" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageButton
             android:layout_width="75dp"
             android:layout_height="75dp" app:srcCompat="@drawable/icon_image"
             android:id="@+id/ibtn_image"
             app:layout_constraintStart_toEndOf="@+id/ibtn_camera" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/ibtn_camera"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
