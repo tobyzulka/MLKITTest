@@ -57,14 +57,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            sendBitmap(imageBitmap)
+                val imageBitmap =data?.extras?.get("data") as Bitmap // data?.data
+                sendBitmap(imageBitmap)
+//            }
         }
         else if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE ){
-            val dataIamge = data?.data
-            sendUri(dataIamge)
+                val dataIamge =data?.data
+                sendUri(dataIamge)
         }
     }
+
+
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -73,15 +76,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendUri(uri: Uri?){
-        val i = Intent(this, ProsesActivity::class.java)
+        val i = Intent(this, CropImageActivity::class.java)
         i.setData(uri)
         startActivity(i)
     }
 
     fun sendBitmap(bitmap: Bitmap){
-        val i = Intent(this, ProsesActivity::class.java)
+        val i = Intent(this, CropImageActivity::class.java)
         val bs = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, bs)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bs)
         i.putExtra("image", bs.toByteArray())
         startActivity(i)
     }

@@ -10,26 +10,22 @@ import android.graphics.BitmapFactory
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import android.widget.Toast
 import com.google.firebase.ml.vision.FirebaseVision
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_crop_image.*
 import java.io.IOException
 
 
 class ProsesActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proses)
 
+        //Action bar Back
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        ibtn_image.setOnClickListener {
-            copy(txtResult.text.toString())
-        }
+        //Detect Gambar dari Crop Activity
         detect()
-
-
     }
 
     fun detect() {
@@ -74,6 +70,7 @@ class ProsesActivity : AppCompatActivity() {
         val clip = ClipData.newPlainText("copy text", text)
         clipboard.primaryClip = clip
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

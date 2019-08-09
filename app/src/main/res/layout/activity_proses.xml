@@ -7,8 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".ProsesActivity">
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="400dp" app:srcCompat="@drawable/error"
+            android:layout_width="404dp"
+            android:layout_height="399dp" app:srcCompat="@drawable/error"
             android:id="@+id/imgCapture"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -40,12 +40,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/icon_copy"
+                android:contentDescription="Copy"
                 android:id="@+id/btnCopy"/>
 
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/icon_save"
+                android:contentDescription="Save"
                 android:id="@+id/btnSave"/>
     </LinearLayout>
 
