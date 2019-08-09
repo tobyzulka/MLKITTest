@@ -33,7 +33,7 @@ class ProsesActivity : AppCompatActivity() {
         val image_path = intent.data
         val image: FirebaseVisionImage
         if (bundle != null) {
-            val b = BitmapFactory.decodeByteArray(intent.getByteArrayExtra("image"), 0, intent.getByteArrayExtra("image").size)
+            val b = BitmapFactory.decodeByteArray(intent.getByteArrayExtra("images"), 0, intent.getByteArrayExtra("images").size)
             imgCapture.setImageBitmap(b)
             image = FirebaseVisionImage.fromBitmap(b)
             recognizeText(image)

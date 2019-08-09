@@ -8,15 +8,22 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import android.content.ContentValues
+
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         val REQUEST_IMAGE_CAPTURE = 1
-
         val IMAGE_PICK_CODE = 2
         private val PERMISSION_CODE = 10
     }
@@ -27,7 +34,17 @@ class MainActivity : AppCompatActivity() {
 
         //Tombol Camera
         ibtn_camera.setOnClickListener {
-            dispatchTakePictureIntent()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                    PackageManager.PERMISSION_DENIED) {
+                    val permission = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    requestPermissions(permission, PERMISSION_CODE)
+                } else {
+                    dispatchTakePictureIntent()
+                }
+            } else {
+                dispatchTakePictureIntent()
+            }
         }
 
         // Tombol Ambil citra dari Gallery
@@ -49,25 +66,22 @@ class MainActivity : AppCompatActivity() {
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
+                takePictureIntent.putExtra(MediaStore.Images.Media.TITLE, "New Picture")
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                val imageBitmap =data?.extras?.get("data") as Bitmap // data?.data
-                sendBitmap(imageBitmap)
-//            }
+            val imageBitmap =data?.extras?.get("data") as Bitmap
+            sendBitmap(imageBitmap)
         }
         else if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE ){
                 val dataIamge =data?.data
                 sendUri(dataIamge)
         }
     }
-
-
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -88,4 +102,5 @@ class MainActivity : AppCompatActivity() {
         i.putExtra("image", bs.toByteArray())
         startActivity(i)
     }
+
 }

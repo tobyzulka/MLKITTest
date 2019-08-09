@@ -59,8 +59,8 @@ class CropImageActivity : AppCompatActivity() {
     fun sendBitmap(bitmap: Bitmap){
         val i = Intent(this, ProsesActivity::class.java)
         val bs = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bs)
-        i.putExtra("image", bs.toByteArray())
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bs)
+        i.putExtra("images", bs.toByteArray())
         startActivity(i)
     }
 
