@@ -11,10 +11,19 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import android.widget.Toast
 import com.google.firebase.ml.vision.FirebaseVision
 import kotlinx.android.synthetic.main.activity_crop_image.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
+import android.text.method.TextKeyListener.clear
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
 
 
 class ProsesActivity : AppCompatActivity() {
+
+
+    private var myClipboard: ClipboardManager? = null
+    private var myClip: ClipData? = null
+    private val FILE_NAME = "example.txt"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +35,39 @@ class ProsesActivity : AppCompatActivity() {
 
         //Detect Gambar dari Crop Activity
         detect()
+        myClipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+
+        btnCopy.setOnClickListener {
+            myClip = ClipData.newPlainText("text", txtResult.text);
+            myClipboard?.setPrimaryClip(myClip);
+
+            Toast.makeText(this, "Text Copied", Toast.LENGTH_SHORT).show();
+        }
+
+        btnSave.setOnClickListener {
+            simpan()
+        }
+
+    }
+
+    fun simpan(){
+        val file:String = txtResult.text.toString()
+        val data:String = txtResult.text.toString()
+        val fileOutputStream:FileOutputStream
+        try {
+            fileOutputStream = openFileOutput(file, Context.MODE_PRIVATE)
+            fileOutputStream.write(data.toByteArray())
+        } catch (e: FileNotFoundException){
+            e.printStackTrace()
+        }catch (e: NumberFormatException){
+            e.printStackTrace()
+        }catch (e: IOException){
+            e.printStackTrace()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+        Toast.makeText(applicationContext,"Data di Simpan",Toast.LENGTH_LONG).show()
+
     }
 
     fun detect() {
@@ -62,17 +104,12 @@ class ProsesActivity : AppCompatActivity() {
             .addOnFailureListener {e ->
                 e.printStackTrace()
             }
-
     }
 
-    fun copy(text: CharSequence){
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("copy text", text)
-        clipboard.primaryClip = clip
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
 }
+
